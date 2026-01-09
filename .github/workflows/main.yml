@@ -1,18 +1,5 @@
 # .github/workflows/infrastructure.yml
 name: Deploy Infrastructure
-
-on:
-  push:
-    branches: [main]
-    paths:
-      - 'terraform/**'
-      - '.github/workflows/infrastructure.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'terraform/**'
-  workflow_dispatch:
-  name: Deploy Infrastructure
 on:
   workflow_dispatch:
     inputs:
@@ -20,17 +7,21 @@ on:
         description: "Deployment environment"
         required: true
         default: "dev"
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Terraform
-        run: |
-          echo "Deploying to ${{ github.event.inputs.env }}"
-          terraform init
-          terraform apply -auto-approve
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+      - name: Terraform Init
+        run: terraform init
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
 env:
   AWS_REGION: us-east-1

@@ -1,0 +1,14 @@
+## cat > kubernetes/rbac.yaml << 'EOF'
+# INTENTIONALLY VULNERABLE: Grants cluster-admin to application
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: todoapp-admin-binding
+subjects:
+- kind: ServiceAccount
+  name: todoapp-sa
+  namespace: todoapp
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

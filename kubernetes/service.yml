@@ -1,0 +1,17 @@
+## cat > kubernetes/service.yaml << 'EOF'
+apiVersion: v1
+kind: Service
+metadata:
+  name: todoapp-service
+  namespace: todoapp
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+spec:
+  type: LoadBalancer
+  selector:
+    app: todoapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3000
+    name: http

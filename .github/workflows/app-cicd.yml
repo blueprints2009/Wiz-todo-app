@@ -127,9 +127,3 @@ jobs:
           echo "url=$NLB_URL" >> $GITHUB_OUTPUT
           echo "Application URL: http://$NLB_URL"
 
-      - name: Summary
-        run: |
-          echo "## Deployment Complete ✅" >> $GITHUB_STEP_SUMMARY
-          echo "- **Image**: ${{ needs.build-and-push.outputs.image-tag }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **NLB**: http://${{ steps.nlb.outputs.url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Cluster**: ${{ env.EKS_CLUSTER_NAME }}" >> $GITHUB_STEP_SUMMARY

@@ -3,9 +3,6 @@ kind: Service
 metadata:
   name: todoapp-service
   namespace: todoapp
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
 spec:
   type: LoadBalancer
   selector:

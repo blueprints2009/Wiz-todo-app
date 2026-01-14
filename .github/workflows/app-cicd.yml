@@ -116,7 +116,7 @@ jobs:
           kubectl apply -f kubernetes/service-account.yml
           kubectl apply -f kubernetes/Rbac.yml
 
-          envsubst '${ECR_REGISTRY} ${IMAGE_TAG}' \ < kubernetes/Deployment.yml | kubectl apply -f -
+          envsubst '${ECR_REGISTRY} ${IMAGE_TAG}' < kubernetes/Deployment.yml | kubectl apply -f -
           kubectl apply -f kubernetes/service.yml
           kubectl apply -f kubernetes/ingress.yml
 

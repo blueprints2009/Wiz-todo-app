@@ -113,9 +113,15 @@ jobs:
           kubectl apply -f kubernetes/service-account.yml
           kubectl apply -f kubernetes/Rbac.yml
 
+          kubectl apply -f kubernetes/Deployment.yml
+
+          kubectl rollout pause deployment/todoapp -n todoapp
+
           kubectl set image deployment/todoapp \
-          todoapp=${{ needs.build-and-push.outputs.image-tag }} \
-          -n todoapp
+            todoapp=${{ needs.build-and-push.outputs.image-tag }} \
+            -n todoapp
+
+          kubectl rollout resume deployment/todoapp -n todoapp
           
           kubectl apply -f kubernetes/service.yml
           kubectl apply -f kubernetes/ingress.yml

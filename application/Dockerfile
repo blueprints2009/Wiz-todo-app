@@ -23,7 +23,7 @@ COPY --from=build /go/src/tasky/assets ./assets
 
 # Create the required file with your name
 # Replace "Your Name" with your actual name
-RUN echo "Wizards" > /app/wizexercise.txt
+RUN echo "Wizardss" > /app/wizexercise.txt
 
 EXPOSE 8080
 ENTRYPOINT ["/app/tasky"]

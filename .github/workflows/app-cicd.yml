@@ -102,15 +102,14 @@ jobs:
             --region ${{ env.AWS_REGION }}
 
       - name: Deploy to EKS
-        # env:
+        env:
           # FULL_IMAGE: ${{ needs['build-and-push'].outputs.image_tag }}
-          # MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |
           FULL_IMAGE="${{ needs['build-and-push'].outputs.image_tag }}"
           export FULL_IMAGE
-          export MONGODB_URI="${{ secrets.MONGODB_URI }}"
           echo "Deploying image: $FULL_IMAGE"
-          export "Mongo URI: $MONGODB_URI"
+          echo $MONGODB_URI
 
           kubectl apply -f kubernetes/Namespace.yml
           kubectl apply -f kubernetes/service-account.yml

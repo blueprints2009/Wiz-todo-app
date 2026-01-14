@@ -111,6 +111,7 @@ jobs:
           export ECR_REGISTRY="${FULL_IMAGE%:*}"
           export IMAGE_TAG="${FULL_IMAGE##*:}"
           
+          echo "ECR_REGISTRY=${{ secrets.ECR_REGISTRY }}"
           if [ -z "${{ secrets.ECR_REGISTRY }}" ]; then echo "ECR_REGISTRY is EMPTY"; else echo "ECR_REGISTRY is SET"; fi
 
           echo Full image:  ${FULL_IMAGE}

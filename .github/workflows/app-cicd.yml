@@ -102,7 +102,7 @@ jobs:
             --region ${{ env.AWS_REGION }}
 
       - name: Deploy to EKS
-        env:
+        # env:
           # FULL_IMAGE: ${{ needs['build-and-push'].outputs.image_tag }}
           # MONGODB_URI: ${{ secrets.MONGODB_URI }}
         run: |

@@ -110,9 +110,11 @@ jobs:
           FULL_IMAGE="${{ needs.build-and-push.outputs.image-tag }}"
           export ECR_REGISTRY="${FULL_IMAGE%:*}"
           export IMAGE_TAG="${FULL_IMAGE##*:}"
+          
+          if [ -z "${{ secrets.ECR_REGISTRY }}" ]; then echo "ECR_REGISTRY is EMPTY"; else echo "ECR_REGISTRY is SET"; fi
 
-          echo ${FULL_IMAGE}
-          echo "Deploying image: ${ECR_REGISTRY}:${IMAGE_TAG}"
+          echo Full image:  ${FULL_IMAGE}
+          
           export MONGODB_URI="${MONGODB_URI}"
 
           echo "Deploying image: ${ECR_REGISTRY}:${IMAGE_TAG}"
